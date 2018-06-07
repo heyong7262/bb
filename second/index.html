@@ -1,0 +1,53 @@
+<meta charset="utf-8">
+<style>
+  input{
+    width: 12%;
+    line-height: 1.5rem;
+  }
+</style>
+<!-- <marquee direction=left>去占手册</marquee> <P>
+<marquee direction=right>去占手册</marquee> 
+ -->
+ <center>
+ <h3>留言作业</h3>
+ 	 留言人：<input type="text" id="username"/>
+   <br/>
+  留言内容：<textarea id="content" placeholder="请输入不超过200字留言内容"></textarea>
+  <button onclick="add()">留言</button>
+  <div id="box">
+  </div>
+ </center>
+
+<script>
+          function add()
+          {
+             // 找对象接值
+             var username = document.getElementById("username").value;
+             var content = document.getElementById("content").value;
+             // 找盒子对象
+             var box = document.getElementById("box");
+             // 创建ajax对象
+             var ajax = new XMLHttpRequest();
+             // 传值
+             ajax.open("post","show_list.php");
+             // 设置头文件
+             ajax.setRequestHeader("content-type","application/x-www-form-urlencoded");
+             // 发送
+             ajax.send("username="+username+"&content="+content);
+             // 监听事件
+             ajax.onreadystatechange=function()
+             {
+                 // 判断是否执行成功
+                 if(ajax.readyState==4 && ajax.status==200)
+                 {
+                    // 替换
+                    box.innerHTML = ajax.responseText;
+
+                 } 
+             }
+
+
+          }
+      </script>
+
+      
